@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "This is default page"
+    return "This is default page::"
 
 @app.route('/profile')
 def users():
