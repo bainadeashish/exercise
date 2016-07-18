@@ -1,5 +1,5 @@
-body            { font-family: sans-serif; background: #eee; }
-a, h1, h2       { color: light blue; }
-h1, h2          { font-family: 'Georgia', serif; margin: 0; }
-h1              { border-bottom: 2px solid #eee; }
-h2              { font-size: 1.2em; }
+
+body	{ font-family: sans-serif; color: brown; }
+h1{ font-family: 'Georgia'; color : purple }
+form {position:fixed;left:350px;top:300px}
+h2{font-family: 'Georgia'; color : red ;position:absolute;left:350px;top:310px }
