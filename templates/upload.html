@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
 <meta charset="ISO-8859-1">
 <title>Upload Spreadsheet</title>
 </head>
 <body>
-<form action="/validation" method='POST' enctype = "multipart/form-data">
-<input type = "file" name = "file" />
-<input type="submit" name="submit" value="Upload Excel">
+
+<form onsubmit="return Validate(this);" action="" method='POST' enctype = "multipart/form-data">
+  <h1>Upload excel to convert into binary format</h1> 
+	<input type = "file" required = "required" name = "file_uploaded">
+	<input type="submit" name="submit" value="Upload Excel" >
 </form>
 </body>
+	
+	
+<script type ="text/javascript">
+var _validFileExtensions = [".xlsx",".xlsm",".xltx",".xls",".xltm",".xlt",".xlam",".xla",".xlw"]; 
+		function Validate(oForm) {
+		    var arrInputs = oForm.getElementsByTagName("input");
+		    for (var i = 0; i < arrInputs.length; i++) {
+		        var oInput = arrInputs[i];
+		        if (oInput.type == "file") {
+		            var sFileName = oInput.value;
+		            if (sFileName.length > 0) {
+		                var blnValid = false;
+		                for (var j = 0; j < _validFileExtensions.length; j++) {
+		                    var sCurExtension = _validFileExtensions[j];
+		                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+		                        blnValid = true;
+		                        break;
+		                    }
+		                }
+		                
+		                if (!blnValid) {
+		                    alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+		                    return false;
+		                }
+		            }
+		        }
+		    }
+		  
+		    return true;
+		}
+	
+</script>
 </html>
