@@ -1,7 +1,5 @@
 from flask import Flask,render_template,request
-from test.test_xml_etree import methods
 import os,xlrd
-import pdb
 app = Flask(__name__)
 
 UPLOAD_FOLDER = 'C:\Users\Ashish.Bainade@infovisionlabs.com\Desktop\Ashish\project\exercise_1\static'
