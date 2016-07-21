@@ -1,5 +1,4 @@
 
-body	{ font-family: sans-serif; color: brown; }
-h1{ font-family: 'Georgia'; color : purple }
-form {position:fixed;left:350px;top:300px}
-h2{font-family: 'Georgia'; color : red ;position:absolute;left:350px;top:310px }
+body	{ font-family: sans-serif; background-color : #D3F6FC;color: #2B66C0; font-family: 'Georgia';}
+form {position:fixed;left:30%;top:30%}
+
