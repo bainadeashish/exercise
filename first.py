@@ -1,7 +1,7 @@
 def create_index(refresh=False, language='python'):
     """ Create ES index """
     if language == 'r':
-        alias_name = app.config["CRAN_ALIAS_NAME"]
+        alias_name = 'cran
         packages = get_packages(language)
 
     package_list = []
