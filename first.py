@@ -1,28 +1,16 @@
-from flask import Flask,render_template,request
-import os,xlrd
-app = Flask(__name__)
+def create_index(refresh=False, language='python'):
+    """ Create ES index """
+    if language == 'r':
+        alias_name = app.config["CRAN_ALIAS_NAME"]
+        packages = get_packages(language)
 
-UPLOAD_FOLDER = 'C:\Users\Ashish.Bainade@infovisionlabs.com\Desktop\Ashish\project\exercise_1\static'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    package_list = []
 
+    # pylint: disable=unexpected-keyword-arg
+    for package in packages:
+        if "href=" not in package:
+            save_package_data(package, language)
+            package_list.append(package['name'])
 
-def validate_file(file):
-    workbook = xlrd.open_workbook(file)
-    worksheet = workbook.sheet_by_index(0)
-    print "value at row 8,column 2 is :{}".format(worksheet.cell(8,4).value)
-    
-@app.route('/',methods=['POST','GET'])
-def index():
-    if request.method == 'GET':
-        return render_template('upload.html')
-    if request.method == 'POST':
-        file = request.files['file_uploaded']
-        filename=file.filename
-        if filename :
-            file_save_path=os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_save_path)
-            return render_template('validation.html',file=file.filename)
-
-if __name__== "__main__":
-    app.run(debug=True)
-    
+    if len(package_list) > 0:
+        delete_missing_packages(package_list, language)
