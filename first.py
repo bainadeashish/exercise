@@ -3,12 +3,6 @@ def get_packages(language='python'):
     app = get_application()
     if language == 'r':
         registry = "https://cran.r-project.org/web/packages/available_packages_by_name.html#available-packages-Z"
-    elif language == 'conda':
-        registry = app.config["CONDA_PYTHON_URL_ES"]
-    elif language == "conda-r":
-        registry = app.config["CONDA_R_URL_ES"]
-    else:
-        registry = app.config["PYPI_URL"]
     response = requests.get(registry) 
     response.raise_for_status()
     html_tree = html.fromstring(response.content)
@@ -44,6 +38,7 @@ def generate_packages(package, artifactory, language):
             return {"name": package_name}
     else:
         return {"name": package}
+    
 def create_index(refresh=False, language='python'):
     """ Create ES index """
     if language == 'r':
@@ -60,3 +55,5 @@ def create_index(refresh=False, language='python'):
 
     if len(package_list) > 0:
         delete_missing_packages(package_list, language)
+
+create_index('r')
